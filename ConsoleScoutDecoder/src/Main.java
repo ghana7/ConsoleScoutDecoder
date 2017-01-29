@@ -12,81 +12,21 @@ public class Main {
 		while(true) {
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
-			String teamToAdd;
 			switch(inputArray[0]) { //inputArray[0] is the command itself
 			case "addTeam": 
-				String teamNumber = inputArray[1];
-				if(Match.isNumeric(teamNumber)) {
-					if(teamExists(Integer.parseInt(teamNumber), teams) == -1) {
-						teams.add(new Team(Integer.parseInt(teamNumber)));
-						System.out.println("Added team " + teamNumber);
-					} else {
-						System.out.println("Team " + teamNumber + " already exists!");
-					}
-				} else {
-					System.out.println(teamNumber + " is not a number. That argument must be a number.");
-				}
+				addTeam(inputArray[1], teams);
 				break;
 			case "addMatch":
-				teamToAdd = inputArray[1];
-				String matchString = inputArray[2];
-				if(Match.isNumeric(teamToAdd)) {
-					if(teamExists(Integer.parseInt(teamToAdd), teams) != -1) {
-						if(isLegalMatch(matchString)) {
-							teams.get(teamExists(Integer.parseInt(teamToAdd), teams)).addMatch(matchString);
-							System.out.println("Added match " + matchString);
-						} else {
-							System.out.println("This is not a legal match format.");
-						}
-					} else {
-						System.out.println("Team " + teamToAdd + " does not exist!");
-					}
-				} else {
-					System.out.println(teamToAdd + " is not a number. That argument must be a number.");
-				}
+				addMatch(inputArray[1],inputArray[2],teams);
 				break;
 			case "addPit":
-				teamToAdd = inputArray[1];
-				String pitString = inputArray[2];
-				if(Match.isNumeric(teamToAdd)) {
-					if(teamExists(Integer.parseInt(teamToAdd), teams) != -1) {
-						if(isLegalMatch(pitString)) {
-							teams.get(teamExists(Integer.parseInt(teamToAdd), teams)).addMatch(pitString);
-							System.out.println("Added pit " + pitString);
-						} else {
-							System.out.println("This is not a legal pit format.");
-						}
-					} else {
-						System.out.println("Team " + teamToAdd + " does not exist!");
-					}
-				} else {
-					System.out.println(teamToAdd + " is not a number. That argument must be a number.");
-				}
+				addPit(inputArray[1],inputArray[2],teams);
 				break;
 			case "printTeam":
-				String teamNumberToPrint = inputArray[1];
-				if(Match.isNumeric(teamNumberToPrint)) {
-					int teamNumberAsInt = Integer.parseInt(teamNumberToPrint);
-					if(teamExists(teamNumberAsInt, teams) != -1) {
-						System.out.println(teams.get(teamExists(Integer.parseInt(teamNumberToPrint),teams)));
-					} else {
-						System.out.println("Team " + teamNumberAsInt + " does not exist.");
-					}
-					
-				} else {
-					System.out.println(teamNumberToPrint + " is not a number. That argument must be a number.");
-				}
+				printTeam(inputArray[1],teams);
 				break;
-			case "sort":
-				String keyToSort = inputArray[1];
-				if(Match.isKey(keyToSort)) {
-					sortTeams(keyToSort, teams);
-					for(Team t : teams) {
-						System.out.println(t);
-					}
-				} else {
-					System.out.println("" + keyToSort + " is not a sortable key.");
-				}
+			case "rankTeams":
+				rankTeams(inputArray[1],teams);
 				break;
 			default:
 				System.out.println("Command not recognized");
@@ -103,6 +43,72 @@ public class Main {
 	}
 	public static boolean isLegalMatch(String s) {
 		return (s.split("}").length == Match.keys.length);
+	}
+	public static void addTeam(String teamNumber, ArrayList<Team> teams) {
+		if(Match.isNumeric(teamNumber)) {
+			if(teamExists(Integer.parseInt(teamNumber), teams) == -1) {
+				teams.add(new Team(Integer.parseInt(teamNumber)));
+				System.out.println("Added team " + teamNumber);
+			} else {
+				System.out.println("Team " + teamNumber + " already exists!");
+			}
+		} else {
+			System.out.println(teamNumber + " is not a number. That argument must be a number.");
+		}
+	}
+	public static void addMatch(String teamNumber, String matchString, ArrayList<Team> teams) {
+		if(Match.isNumeric(teamNumber)) {
+			if(teamExists(Integer.parseInt(teamNumber), teams) != -1) {
+				if(isLegalMatch(matchString)) {
+					teams.get(teamExists(Integer.parseInt(teamNumber), teams)).addMatch(matchString);
+					System.out.println("Added match " + matchString);
+				} else {
+					System.out.println("This is not a legal match format.");
+				}
+			} else {
+				System.out.println("Team " + teamNumber + " does not exist!");
+			}
+		} else {
+			System.out.println(teamNumber + " is not a number. That argument must be a number.");
+		}
+	}
+	public static void addPit(String teamNumber, String pitString, ArrayList<Team> teams) {
+		if(Match.isNumeric(teamNumber)) {
+			if(teamExists(Integer.parseInt(teamNumber), teams) != -1) {
+				if(isLegalMatch(pitString)) {
+					teams.get(teamExists(Integer.parseInt(teamNumber), teams)).addMatch(pitString);
+					System.out.println("Added match " + pitString);
+				} else {
+					System.out.println("This is not a legal pit format.");
+				}
+			} else {
+				System.out.println("Team " + teamNumber + " does not exist!");
+			}
+		} else {
+			System.out.println(teamNumber + " is not a number. That argument must be a number.");
+		}
+	}
+	public static void printTeam(String teamNumber, ArrayList<Team> teams) {
+		if(Match.isNumeric(teamNumber)) {
+			int teamNumberAsInt = Integer.parseInt(teamNumber);
+			if(teamExists(teamNumberAsInt, teams) != -1) {
+				System.out.println(teams.get(teamExists(Integer.parseInt(teamNumber),teams)));
+			} else {
+				System.out.println("Team " + teamNumberAsInt + " does not exist.");
+			}
+		} else {
+			System.out.println(teamNumber + " is not a number. That argument must be a number.");
+		}
+	}
+	public static void rankTeams(String key, ArrayList<Team> teams) {
+		if(Match.isKey(key)) {
+			sortTeams(key, teams);
+			for(Team t : teams) {
+				System.out.println(t);
+			}
+		} else {
+			System.out.println("" + key + " is not a sortable key.");
+		}
 	}
 	public static void sortTeams(String key, ArrayList<Team> teams) {
 		if(teams.get(0).getDataArray(key).get(0) instanceof Integer) {

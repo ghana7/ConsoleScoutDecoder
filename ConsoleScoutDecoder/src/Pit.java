@@ -3,7 +3,8 @@ import java.util.Map;
 
 public class Pit {
 	private Map<String, Object> data = new HashMap<String,Object>();
-	final static public String[] keys = new String[] {"autoGear","autoStartPlace","autoHighShoot","autoLowShoot","autoHopper","gear","roboSpeed","highShoot","lowShoot","shootSpeed","shootAccuracy","climb","climbSpeed","capacity","endStrat","matchStrat","allianceRole","autoNotes","whereOnField"};					
+	//final static public String[] keys = new String[] {"autoGear","autoStartPlace","autoHighShoot","autoLowShoot","autoHopper","gear","roboSpeed","highShoot","lowShoot","shootSpeed","shootAccuracy","climb","climbSpeed","capacity","endStrat","matchStrat","allianceRole","autoNotes","whereOnField"};
+	final static public String[] keys = new String[] {"pitSize","pitQuality","pitOnFire"};
 	public Pit() {
 		for(String k : keys) {
 			data.put(k, null);

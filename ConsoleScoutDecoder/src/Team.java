@@ -3,15 +3,20 @@ import java.util.*;
 public class Team {
 	private int number;
 	private ArrayList<Match> matches;
+	private ArrayList<Pit> pits;
 	public Team(int _number) {
 		number = _number;
 		matches = new ArrayList<Match>();
+		pits = new ArrayList<Pit>();
 	}
 	public int getNumber() {
 		return number;
 	}
 	public void addMatch(String matchString) {
 		matches.add(new Match(matchString));
+	}
+	public void addPit(String pitString) {
+		pits.add(new Pit(pitString));
 	}
 	public ArrayList<Object> getDataArray(String key) {
 		ArrayList<Object> output = new ArrayList<Object>();
@@ -67,6 +72,9 @@ public class Team {
 		}
 		avgString = avgString.substring(0, avgString.length() - 1);
 		output += ("\tAverage - " + new Match(avgString) + "\n");
+		for(Pit p : pits) {
+			output += "\tPit - " + p + "\n";
+		}
 		return output;
 	}
 	public boolean equals(Team t) {
