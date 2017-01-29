@@ -1,4 +1,5 @@
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -78,9 +79,16 @@ public class Main {
 					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding 
 				        input = input.substring(1);
 				    }
+					try{
+						Match tempM = new Match();
+						Pit tempP = new Pit();
+						
+					} catch (Exception error) {
+						System.out.println("Error: Invalid Input");
+					}
 				}
-			} catch (Exception e) {
-				System.out.println("Invalid File Input");
+			} catch (FileNotFoundException e) {
+				
 			}
 		} 
 	}
