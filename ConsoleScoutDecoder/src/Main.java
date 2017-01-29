@@ -47,7 +47,26 @@ public class Main {
 			}
 		}
 	}
+<<<<<<< HEAD
 
+=======
+	
+	public static void findFile() {
+		JFileChooser fc = new JFileChooser();
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
+			File file = fc.getSelectedFile();
+			try {
+				Scanner inputFile = new Scanner(file);
+				while(inputFile.hasNext()) { // Does until there is no more data
+					
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid File Input");
+			}
+		} 
+	}
+	
+>>>>>>> refs/remotes/origin/master
 	public static int teamExists(int t, ArrayList<Team> teams) {
 		for (Team team : teams) {
 			if (team.getNumber() == t) {
