@@ -1,4 +1,7 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Main {
@@ -51,6 +54,16 @@ public class Main {
 					System.out.println(inputArray[1] + " is not a number. That argument must be a number.");
 				}
 				break;
+			case "rank":
+				if(Match.isKey(inputArray[1])) {
+					sortTeams(inputArray[1], teams);
+					for(Team t : teams) {
+						System.out.println(t);
+					}
+				} else {
+					System.out.println("" + inputArray[1] + " is not a sortable key.");
+				}
+				break;
 			default:
 				System.out.println("Command not recognized");
 			}
@@ -67,5 +80,32 @@ public class Main {
 	public static boolean isLegalMatch(String s) {
 		return (s.split("}").length == Match.keys.length);
 	}
-
+	public static void sortTeams(String key, ArrayList<Team> teams) {
+		if(teams.get(0).getDataArray(key).get(0) instanceof Integer) {
+			Collections.sort(teams, (a,b) -> (Integer)a.getAverage(key) < (Integer)b.getAverage(key) ? -1 : (Integer)a.getAverage(key) == (Integer)b.getAverage(key) ? 0 : 1);
+		} else if(teams.get(0).getDataArray(key).get(0) instanceof Boolean) {
+			//eventually make to sort by most true
+//			ArrayList<Team> temp = new ArrayList<Team>();
+//			for(Team t : teams) {
+//				if((Boolean)t.getAverage(key)) {
+//					temp.add(0,t);
+//				} else {
+//					temp.add(t);
+//				}
+//			}
+//			teams = temp;
+			for(int i = 0; i < teams.size();i++) {
+				if (!(Boolean)teams.get(i).getAverage(key)) {
+					for(int j = i + 1; j<teams.size();j++) {
+						if((Boolean)teams.get(j).getAverage(key)) {
+							Team temp = teams.get(i);
+							teams.set(i, teams.get(j));
+							teams.set(j, temp);
+							break;
+						}
+					}
+				}
+			}
+		}
+	}
 }

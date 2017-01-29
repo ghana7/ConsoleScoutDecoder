@@ -44,4 +44,12 @@ public class Match {
 	    }
 	    return true;
 	}
+	public static boolean isKey(String str) {
+		for(String key : keys) {
+			if(key.equals(str)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
