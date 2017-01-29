@@ -14,22 +14,22 @@ public class Main {
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 			switch (inputArray[0]) { // inputArray[0] is the command itself
-			case "addTeam":
+			case "addTeam": //adds a team to the data
 				addTeam(inputArray[1], teams);
 				break;
-			case "addMatch":
+			case "addMatch": //adds a match to a team
 				addMatch(inputArray[1], inputArray[2], teams);
 				break;
-			case "addPit":
+			case "addPit": //adds a pit to a team
 				addPit(inputArray[1], inputArray[2], teams);
 				break;
-			case "printTeam":
+			case "printTeam": //prints a team and its data
 				printTeam(inputArray[1], teams);
 				break;
-			case "rankTeams":
+			case "rankTeams": //sorts teams by a piece of info and prints them in order
 				rankTeams(inputArray[1], teams);
 				break;
-			case "findFile":
+			case "findFile": //gets info from file
 				findFile();
 				break;
 			case "help":
@@ -65,7 +65,7 @@ public class Main {
 			}
 		} 
 	}
-	public static int teamExists(int t, ArrayList<Team> teams) {
+	public static int teamExists(int t, ArrayList<Team> teams) { //determines if team t exists in teams, returns index if it does
 		for (Team team : teams) {
 			if (team.getNumber() == t) {
 				return teams.indexOf(team);
@@ -74,11 +74,11 @@ public class Main {
 		return -1;
 	}
 
-	public static boolean isLegalMatch(String s) {
+	public static boolean isLegalMatch(String s) { //checks if match string is in legal format
 		return (s.split("}").length == Match.keys.length);
 	}
 
-	public static void addTeam(String teamNumber, ArrayList<Team> teams) {
+	public static void addTeam(String teamNumber, ArrayList<Team> teams) { //adds team teamNumber to arraylist teams
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) == -1) {
 				teams.add(new Team(Integer.parseInt(teamNumber)));
@@ -91,7 +91,7 @@ public class Main {
 		}
 	}
 
-	public static void addMatch(String teamNumber, String matchString, ArrayList<Team> teams) {
+	public static void addMatch(String teamNumber, String matchString, ArrayList<Team> teams) { //adds match by matchstring to team teamnumber
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
 				if (isLegalMatch(matchString)) {
@@ -108,7 +108,7 @@ public class Main {
 		}
 	}
 
-	public static void addPit(String teamNumber, String pitString, ArrayList<Team> teams) {
+	public static void addPit(String teamNumber, String pitString, ArrayList<Team> teams) { //adds pit scout data by pitString to team teamNumber
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
 				if (isLegalMatch(pitString)) {
@@ -125,7 +125,7 @@ public class Main {
 		}
 	}
 
-	public static void printTeam(String teamNumber, ArrayList<Team> teams) {
+	public static void printTeam(String teamNumber, ArrayList<Team> teams) { //prints team teamNumber and its data
 		if (Match.isNumeric(teamNumber)) {
 			int teamNumberAsInt = Integer.parseInt(teamNumber);
 			if (teamExists(teamNumberAsInt, teams) != -1) {
@@ -138,7 +138,7 @@ public class Main {
 		}
 	}
 
-	public static void rankTeams(String key, ArrayList<Team> teams) {
+	public static void rankTeams(String key, ArrayList<Team> teams) { //sorts teams by key then prints all of them
 		if (Match.isKey(key)) {
 			sortTeams(key, teams);
 			for (Team t : teams) {
@@ -149,13 +149,12 @@ public class Main {
 		}
 	}
 
-	public static void sortTeams(String key, ArrayList<Team> teams) {
-		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) {
+	public static void sortTeams(String key, ArrayList<Team> teams) { //sorts teams by a key
+		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) { //if int, sorts numericalls
 			Collections.sort(teams, (a, b) -> (Integer) a.getAverage(key) < (Integer) b.getAverage(key) ? -1
 					: (Integer) a.getAverage(key) == (Integer) b.getAverage(key) ? 0 : 1);
-		} else if (teams.get(0).getDataArray(key).get(0) instanceof Boolean) {
-			// eventually make to sort by most true
-			for (int i = 0; i < teams.size(); i++) {
+		} else if (teams.get(0).getDataArray(key).get(0) instanceof Boolean) {//if boolean, puts those with majority true to front
+			for (int i = 0; i < teams.size(); i++) {                          //eventually should be by % of true
 				if (!(Boolean) teams.get(i).getAverage(key)) {
 					for (int j = i + 1; j < teams.size(); j++) {
 						if ((Boolean) teams.get(j).getAverage(key)) {
