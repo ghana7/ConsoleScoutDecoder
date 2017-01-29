@@ -55,12 +55,29 @@ public class Main {
 	}
 	public static void findFile() {
 		JFileChooser fc = new JFileChooser();
+		boolean workaround = true;
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
 			File file = fc.getSelectedFile();
 			try {
 				Scanner inputFile = new Scanner(file);
+				
 				while(inputFile.hasNext()) { // Does until there is no more data
-					
+					ArrayList<String> decoded = new ArrayList<String>();
+					String input;
+					int index;
+					input = inputFile.nextLine(); // Grabs string from file
+					if(!input.split("}")[2].equals("true") || !input.split("}")[2].equals("false")) // Accounts for the new line bug error in scouting app 
+						if (workaround)
+						{
+							inputFile.nextLine();
+							workaround = false;
+						}
+						input += inputFile.nextLine();
+						if (inputFile.hasNext())
+							inputFile.nextLine();
+					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding 
+				        input = input.substring(1);
+				    }
 				}
 			} catch (Exception e) {
 				System.out.println("Invalid File Input");
