@@ -1,8 +1,11 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class Main {
 
@@ -47,10 +50,6 @@ public class Main {
 			}
 		}
 	}
-<<<<<<< HEAD
-
-=======
-	
 	public static void findFile() {
 		JFileChooser fc = new JFileChooser();
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
@@ -65,8 +64,6 @@ public class Main {
 			}
 		} 
 	}
-	
->>>>>>> refs/remotes/origin/master
 	public static int teamExists(int t, ArrayList<Team> teams) {
 		for (Team team : teams) {
 			if (team.getNumber() == t) {
