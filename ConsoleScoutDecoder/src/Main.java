@@ -31,6 +31,9 @@ public class Main {
 			case "rankTeams":
 				rankTeams(inputArray[1], teams);
 				break;
+			case "findFile":
+				findFile();
+				break;
 			case "help":
 				System.out.println("addTeam <teamNumber>");
 				System.out.println("\tAdds a team with number teamNumber");
