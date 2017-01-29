@@ -12,6 +12,7 @@ public class Main {
 		while(true) {
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
+			String teamToAdd;
 			switch(inputArray[0]) { //inputArray[0] is the command itself
 			case "addTeam": 
 				String teamNumber = inputArray[1];
@@ -27,7 +28,7 @@ public class Main {
 				}
 				break;
 			case "addMatch":
-				String teamToAdd = inputArray[1];
+				teamToAdd = inputArray[1];
 				String matchString = inputArray[2];
 				if(Match.isNumeric(teamToAdd)) {
 					if(teamExists(Integer.parseInt(teamToAdd), teams) != -1) {
@@ -36,6 +37,24 @@ public class Main {
 							System.out.println("Added match " + matchString);
 						} else {
 							System.out.println("This is not a legal match format.");
+						}
+					} else {
+						System.out.println("Team " + teamToAdd + " does not exist!");
+					}
+				} else {
+					System.out.println(teamToAdd + " is not a number. That argument must be a number.");
+				}
+				break;
+			case "addPit":
+				teamToAdd = inputArray[1];
+				String pitString = inputArray[2];
+				if(Match.isNumeric(teamToAdd)) {
+					if(teamExists(Integer.parseInt(teamToAdd), teams) != -1) {
+						if(isLegalMatch(pitString)) {
+							teams.get(teamExists(Integer.parseInt(teamToAdd), teams)).addMatch(pitString);
+							System.out.println("Added pit " + pitString);
+						} else {
+							System.out.println("This is not a legal pit format.");
 						}
 					} else {
 						System.out.println("Team " + teamToAdd + " does not exist!");
