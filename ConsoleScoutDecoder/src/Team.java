@@ -18,18 +18,18 @@ public class Team {
 	public void addPit(String pitString) {
 		pits.add(new Pit(pitString));
 	}
-	public ArrayList<Object> getDataArray(String key) {
+	public ArrayList<Object> getDataArray(String key) { //gets an arraylist of all pieces of info for key
 		ArrayList<Object> output = new ArrayList<Object>();
 		for(Match m : matches) {
 			output.add(m.getValue(key));
 		}
 		return(output);
 	}
-	public Object getAverage(String key) {
+	public Object getAverage(String key) { //gets average of all info for key
 		if(matches.size() != 0) {
 			ArrayList<Object> allData = getDataArray(key);
 			Object typeTester = allData.get(0);
-			if(typeTester instanceof Integer) {
+			if(typeTester instanceof Integer) { //if int, returns mean
 				int sum = 0;
 				int count = 0;
 				for(Object o : allData) {
@@ -37,7 +37,7 @@ public class Team {
 					count++;
 				}
 				return (sum/count);
-			} else if(typeTester instanceof Boolean) {
+			} else if(typeTester instanceof Boolean) { //if boolean, returns most common of true/false
 				int trueCount = 0;
 				int falseCount = 0;
 				for(Object o : allData) {
@@ -54,7 +54,7 @@ public class Team {
 					return false;
 				}
 			} else {
-				return (String)typeTester;
+				return (String)typeTester; //if string, returns first (change to something more useful eventually)
 			}
 		} else {
 			return null;
@@ -63,17 +63,17 @@ public class Team {
 	public String toString() {
 		String output = "Team " + number + "\n";
 		for(Match m : matches) {
-			output += ("\tMatch - " + m + "\n");
+			output += ("\tMatch - " + m + "\n"); //prints all matches, indented
 		}
 		String avgString = "";
 		for(String key : Match.keys) {
-			avgString += getAverage(key);
+			avgString += getAverage(key); //creates a fake match to server as the average
 			avgString += "}";
 		}
-		avgString = avgString.substring(0, avgString.length() - 1);
-		output += ("\tAverage - " + new Match(avgString) + "\n");
+		avgString = avgString.substring(0, avgString.length() - 1); //takes off hanging }
+		output += ("\tAverage - " + new Match(avgString) + "\n"); //prints average, indented
 		for(Pit p : pits) {
-			output += "\tPit - " + p + "\n";
+			output += "\tPit - " + p + "\n"; //prints all pits, indented
 		}
 		return output;
 	}
