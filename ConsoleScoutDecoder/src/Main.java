@@ -1,8 +1,11 @@
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Scanner;
+
+import javax.swing.JFileChooser;
 
 public class Main {
 	
@@ -28,6 +31,9 @@ public class Main {
 			case "rankTeams":
 				rankTeams(inputArray[1],teams);
 				break;
+			case "findFile":
+				findFile();
+				break;
 			case "help":
 				System.out.println("addTeam <teamNumber>");
 				System.out.println("\tAdds a team with number teamNumber");
@@ -47,6 +53,22 @@ public class Main {
 			}
 		}
 	}
+	
+	public static void findFile() {
+		JFileChooser fc = new JFileChooser();
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
+			File file = fc.getSelectedFile();
+			try {
+				Scanner inputFile = new Scanner(file);
+				while(inputFile.hasNext()) { // Does until there is no more data
+					
+				}
+			} catch (Exception e) {
+				System.out.println("Invalid File Input");
+			}
+		}
+	}
+	
 	public static int teamExists(int t, ArrayList<Team> teams) {
 		for(Team team : teams) {
 			if(team.getNumber() == t) {
