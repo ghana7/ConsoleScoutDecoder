@@ -28,6 +28,20 @@ public class Main {
 			case "rankTeams":
 				rankTeams(inputArray[1],teams);
 				break;
+			case "help":
+				System.out.println("addTeam <teamNumber>");
+				System.out.println("\tAdds a team with number teamNumber");
+				System.out.println("addMatch <teamNumber> <matchString>");
+				System.out.println("\tAdds data from a match from string matchString to team teamNumber.");
+				System.out.println("\tRequires team teamNumber to already exist.");
+				System.out.println("addPit <teamNumber> <pitString>");
+				System.out.println("\tAdds data from a pit scout from string pitString to team teamNumber.");
+				System.out.println("\tRequires team teamNumber to already exist.");
+				System.out.println("printTeam <teamNumber>");
+				System.out.println("\tPrints team teamNumber to the console");
+				System.out.println("ranksTeams <key>");
+				System.out.println("\tRanks teams by key");
+				break;
 			default:
 				System.out.println("Command not recognized");
 			}
