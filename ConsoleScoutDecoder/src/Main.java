@@ -66,7 +66,7 @@ public class Main {
 			} catch (Exception e) {
 				System.out.println("Invalid File Input");
 			}
-		}
+		} 
 	}
 	
 	public static int teamExists(int t, ArrayList<Team> teams) {
