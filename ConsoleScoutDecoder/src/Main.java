@@ -57,6 +57,7 @@ public class Main {
 	public static void findFile() {//this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
 		boolean workaround = true;
+		
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
 			File file = fc.getSelectedFile();
 			try {
@@ -88,6 +89,10 @@ public class Main {
 						} else { //if it does, it adds the data to it
 							if(accessData[2].equals("true") || accessData[2].equals("false")) {
 								addPit(accessData[0],input.substring(2),allTeams);
+//	for some reason this shit doesnt work and idk why------------------------------
+			//----------------------------------------------------
+							} else {
+								addMatch(accessData[0],input.substring(2),allTeams);
 							}
 						}
 					} catch (Exception error) {
