@@ -8,7 +8,7 @@ import javax.swing.JFileChooser;
 
 public class Main {
 
-	private static ArrayList<Team> allTeams = new ArrayList<Team>();
+//	private static ArrayList<Team> allTeams = new ArrayList<Team>();
 	
 	public static void main(String[] args) {
 		ArrayList<Team> teams = new ArrayList<Team>();
@@ -33,7 +33,7 @@ public class Main {
 				rankTeams(inputArray[1], teams);
 				break;
 			case "findFile": //gets info from file
-				findFile();
+				findFile(teams);
 				break;
 			case "help":
 				System.out.println("addTeam <teamNumber>");
@@ -54,7 +54,7 @@ public class Main {
 			}
 		}
 	}
-	public static void findFile() {//this is basically all from Eric's code so blame him if it doesn't make sense
+	public static void findFile(ArrayList<Team> teams) {//this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
 		boolean workaround = true;
 		
@@ -84,15 +84,15 @@ public class Main {
 //						Match tempM = new Match();
 //						Pit tempP = new Pit();
 						String[] accessData = input.split("}");
-						if(teamExists(Integer.parseInt(accessData[0]), allTeams) == -1) {
-							addTeam(accessData[0],allTeams); //adds the team if it does not exist yet
+						if(teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
+							addTeam(accessData[0],teams); //adds the team if it does not exist yet
 						} else { //if it does, it adds the data to it
 							if(accessData[2].equals("true") || accessData[2].equals("false")) {
-								addPit(accessData[0],input.substring(2),allTeams);
+								addPit(accessData[0],input.substring(2),teams);
 //	for some reason this shit doesnt work and idk why------------------------------
 			//----------------------------------------------------
 							} else {
-								addMatch(accessData[0],input.substring(2),allTeams);
+								addMatch(accessData[0],input.substring(2),teams);
 							}
 						}
 					} catch (Exception error) {
@@ -122,7 +122,7 @@ public class Main {
 			if (teamExists(Integer.parseInt(teamNumber), teams) == -1) {
 				teams.add(new Team(Integer.parseInt(teamNumber)));
 				System.out.println("Added team " + teamNumber);
-				allTeams.add(new Team(Integer.parseInt(teamNumber)));
+		//		teams.add(new Team(Integer.parseInt(teamNumber)));
 			} else {
 				System.out.println("Team " + teamNumber + " already exists!");
 			}
