@@ -80,16 +80,22 @@ public class Main {
 				        input = input.substring(1);
 				    }
 					try{
-						Match tempM = new Match();
-						Pit tempP = new Pit();
-						String[] teamNumFind = input.split("}");
-						addTeam(teamNumFind[0],allTeams);
+//						Match tempM = new Match();
+//						Pit tempP = new Pit();
+						String[] accessData = input.split("}");
+						if(teamExists(Integer.parseInt(accessData[0]), allTeams) == -1) {
+							addTeam(accessData[0],allTeams); //adds the team if it does not exist yet
+						} else { //if it does, it adds the data to it
+							if(accessData[2].equals("true") || accessData[2].equals("false")) {
+								addPit(accessData[0],input.substring(2),allTeams);
+							}
+						}
 					} catch (Exception error) {
 						System.out.println("Error: Invalid Input");
 					}
 				}
 			} catch (FileNotFoundException e) {
-				
+				System.out.println("ERROR: File not found");
 			}
 		} 
 	}
@@ -142,7 +148,7 @@ public class Main {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
 				if (isLegalMatch(pitString)) {
 					teams.get(teamExists(Integer.parseInt(teamNumber), teams)).addMatch(pitString);
-					System.out.println("Added match " + pitString);
+					System.out.println("Added pit " + pitString);
 				} else {
 					System.out.println("This is not a legal pit format.");
 				}
