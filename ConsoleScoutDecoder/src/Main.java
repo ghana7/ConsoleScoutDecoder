@@ -8,6 +8,8 @@ import javax.swing.JFileChooser;
 
 public class Main {
 
+	private static ArrayList<Team> allTeams = new ArrayList<Team>();
+	
 	public static void main(String[] args) {
 		ArrayList<Team> teams = new ArrayList<Team>();
 		Scanner sc = new Scanner(System.in);
@@ -52,7 +54,7 @@ public class Main {
 			}
 		}
 	}
-	public static void findFile() {
+	public static void findFile() {//this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
 		boolean workaround = true;
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
@@ -61,7 +63,7 @@ public class Main {
 				Scanner inputFile = new Scanner(file);
 				
 				while(inputFile.hasNext()) { // Does until there is no more data
-					ArrayList<String> decoded = new ArrayList<String>();
+				//	ArrayList<String> decoded = new ArrayList<String>();
 					String input;
 					int index;
 					input = inputFile.nextLine(); // Grabs string from file
@@ -80,7 +82,8 @@ public class Main {
 					try{
 						Match tempM = new Match();
 						Pit tempP = new Pit();
-						
+						String[] teamNumFind = input.split("}");
+						addTeam(teamNumFind[0],allTeams);
 					} catch (Exception error) {
 						System.out.println("Error: Invalid Input");
 					}
@@ -108,6 +111,7 @@ public class Main {
 			if (teamExists(Integer.parseInt(teamNumber), teams) == -1) {
 				teams.add(new Team(Integer.parseInt(teamNumber)));
 				System.out.println("Added team " + teamNumber);
+				allTeams.add(new Team(Integer.parseInt(teamNumber)));
 			} else {
 				System.out.println("Team " + teamNumber + " already exists!");
 			}
