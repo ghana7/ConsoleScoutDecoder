@@ -67,7 +67,7 @@ public class Team {
 		}
 		String avgString = "";
 		for(String key : Match.keys) {
-			avgString += getAverage(key); //creates a fake match to server as the average
+			avgString += getAverage(key); //creates a fake match to serve as the average
 			avgString += "}";
 		}
 		avgString = avgString.substring(0, avgString.length() - 1); //takes off hanging }

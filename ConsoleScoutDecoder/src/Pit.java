@@ -26,7 +26,7 @@ public class Pit {
 				}
 			}
 		} else {
-			System.out.println("ERROR");
+			//failure
 		}
 	}
 	public Object getValue(String key) {
