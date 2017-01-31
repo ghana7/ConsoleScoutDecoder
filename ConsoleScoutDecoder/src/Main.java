@@ -6,9 +6,6 @@ import java.util.Scanner;
 import javax.swing.JFileChooser;
 
 public class Main {
-
-//	private static ArrayList<Team> allTeams = new ArrayList<Team>();
-	
 	public static void main(String[] args) {
 		ArrayList<Team> teams = new ArrayList<Team>();
 		Scanner sc = new Scanner(System.in);
@@ -16,22 +13,23 @@ public class Main {
 			String input = sc.nextLine();
 			String[] inputArray = input.split(" ");
 			switch (inputArray[0]) { // inputArray[0] is the command itself
-			case "addTeam": //adds a team to the data
+			case "addTeam": // adds a team to the data
 				addTeam(inputArray[1], teams);
 				break;
-			case "addMatch": //adds a match to a team
+			case "addMatch": // adds a match to a team
 				addMatch(inputArray[1], inputArray[2], teams);
 				break;
-			case "addPit": //adds a pit to a team
+			case "addPit": // adds a pit to a team
 				addPit(inputArray[1], inputArray[2], teams);
 				break;
-			case "printTeam": //prints a team and its data
+			case "printTeam": // prints a team and its data
 				printTeam(inputArray[1], teams);
 				break;
-			case "rankTeams": //sorts teams by a piece of info and prints them in order
+			case "rankTeams": // sorts teams by a piece of info and prints them
+								// in order
 				rankTeams(inputArray[1], teams);
 				break;
-			case "findFile": //gets info from file
+			case "findFile": // gets info from file
 				findFile(teams);
 				break;
 			case "help":
@@ -53,20 +51,22 @@ public class Main {
 			}
 		}
 	}
-	public static void findFile(ArrayList<Team> teams) {//this is basically all from Eric's code so blame him if it doesn't make sense
+
+	public static void findFile(ArrayList<Team> teams) {
+		// this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
 		boolean workaround = true;
-		
-		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser 
+
+		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			File file = fc.getSelectedFile();
 			try {
 				Scanner inputFile = new Scanner(file);
-				
-				while(inputFile.hasNext()) { // Does until there is no more data
-					String input = inputFile.nextLine(); //gets line of file
-					if(!input.split("}")[2].equals("true") && !input.split("}")[2].equals("false")) { // Accounts for the new line bug error in scouting app 
-						if (workaround)
-						{
+
+				while (inputFile.hasNext()) { // Does until there is no more data
+					String input = inputFile.nextLine(); // gets line of file
+					if (!input.split("}")[2].equals("true") && !input.split("}")[2].equals("false")) {
+						//for the weird ass bugs from the app
+						if (workaround) {
 							inputFile.nextLine();
 							workaround = false;
 						}
@@ -74,19 +74,19 @@ public class Main {
 						if (inputFile.hasNext())
 							inputFile.nextLine();
 					}
-					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding 
-				        input = input.substring(1);
-				    }
-					try
-					{
+					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding
+						input = input.substring(1);
+					}
+					try {
 						String[] accessData = input.split("}");
-						if(teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
-							addTeam(accessData[0],teams); //adds the team if it does not exist yet
-						} else { //if it does, it adds the data to it
-							if(accessData[2].equals("true") || accessData[2].equals("false")) {
-								addPit(accessData[0],input.substring(2),teams);
+						if (teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
+							addTeam(accessData[0], teams); // adds the team if it does not exist yet
+						} else { // if it does, it adds the data to it
+							if (accessData[2].equals("true") || accessData[2].equals("false")) {
+								addPit(accessData[0], input.substring(2), teams);
+
 							} else {
-								addMatch(accessData[0],input.substring(2),teams);
+								addMatch(accessData[0], input.substring(2), teams);
 							}
 						}
 					} catch (Exception error) {
@@ -96,9 +96,11 @@ public class Main {
 			} catch (FileNotFoundException e) {
 				System.out.println("Error: File not found");
 			}
-		} 
+		}
 	}
-	public static int teamExists(int t, ArrayList<Team> teams) { //determines if team t exists in teams, returns index if it does
+
+	public static int teamExists(int t, ArrayList<Team> teams) { 
+		// determines if team t exists in teams, returns index if it does
 		for (Team team : teams) {
 			if (team.getNumber() == t) {
 				return teams.indexOf(team);
@@ -107,11 +109,12 @@ public class Main {
 		return -1;
 	}
 
-	public static boolean isLegalMatch(String s) { //checks if match string is in legal format
+	public static boolean isLegalMatch(String s) { // checks if match string is in legal format
 		return (s.split("}").length == Match.keys.length);
 	}
 
-	public static void addTeam(String teamNumber, ArrayList<Team> teams) { //adds team teamNumber to arraylist teams
+	public static void addTeam(String teamNumber, ArrayList<Team> teams) { 
+		// adds team teamNumber to arraylist teams
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) == -1) {
 				teams.add(new Team(Integer.parseInt(teamNumber)));
@@ -124,7 +127,8 @@ public class Main {
 		}
 	}
 
-	public static void addMatch(String teamNumber, String matchString, ArrayList<Team> teams) { //adds match by matchstring to team teamnumber
+	public static void addMatch(String teamNumber, String matchString, ArrayList<Team> teams) { 
+		// adds match by matchString to team teamNumber
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
 				if (isLegalMatch(matchString)) {
@@ -141,7 +145,8 @@ public class Main {
 		}
 	}
 
-	public static void addPit(String teamNumber, String pitString, ArrayList<Team> teams) { //adds pit scout data by pitString to team teamNumber
+	public static void addPit(String teamNumber, String pitString, ArrayList<Team> teams) { 
+		// adds pit scout data by pitString to team teamNumber
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
 				if (isLegalMatch(pitString)) {
@@ -158,7 +163,8 @@ public class Main {
 		}
 	}
 
-	public static void printTeam(String teamNumber, ArrayList<Team> teams) { //prints team teamNumber and its data
+	public static void printTeam(String teamNumber, ArrayList<Team> teams) { 
+		// prints team teamNumber and its data
 		if (Match.isNumeric(teamNumber)) {
 			int teamNumberAsInt = Integer.parseInt(teamNumber);
 			if (teamExists(teamNumberAsInt, teams) != -1) {
@@ -171,7 +177,8 @@ public class Main {
 		}
 	}
 
-	public static void rankTeams(String key, ArrayList<Team> teams) { //sorts teams by key then prints all of them
+	public static void rankTeams(String key, ArrayList<Team> teams) { 
+		// sorts teams by key then prints all of them
 		if (Match.isKey(key)) {
 			sortTeams(key, teams);
 			for (Team t : teams) {
@@ -182,12 +189,12 @@ public class Main {
 		}
 	}
 
-	public static void sortTeams(String key, ArrayList<Team> teams) { //sorts teams by a key
-		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) { //if int, sorts numerically
+	public static void sortTeams(String key, ArrayList<Team> teams) { // sorts teams by a key
+		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) { // if int, sorts numerically
 			Collections.sort(teams, (a, b) -> (Integer) a.getAverage(key) < (Integer) b.getAverage(key) ? -1
 					: (Integer) a.getAverage(key) == (Integer) b.getAverage(key) ? 0 : 1);
-		} else if (teams.get(0).getDataArray(key).get(0) instanceof Boolean) {//if boolean, puts those with majority true to front
-			for (int i = 0; i < teams.size(); i++) {                          //eventually should be by % of true
+		} else if (teams.get(0).getDataArray(key).get(0) instanceof Boolean) {// if boolean, puts those with majority true to front
+			for (int i = 0; i < teams.size(); i++) { // eventually should be by % of true
 				if (!(Boolean) teams.get(i).getAverage(key)) {
 					for (int j = i + 1; j < teams.size(); j++) {
 						if ((Boolean) teams.get(j).getAverage(key)) {
