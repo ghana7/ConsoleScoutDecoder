@@ -63,11 +63,8 @@ public class Main {
 				Scanner inputFile = new Scanner(file);
 				
 				while(inputFile.hasNext()) { // Does until there is no more data
-				//	ArrayList<String> decoded = new ArrayList<String>();
-					String input;
-					int index;
-					input = inputFile.nextLine(); // Grabs string from file
-					if(!input.split("}")[2].equals("true") || !input.split("}")[2].equals("false")) // Accounts for the new line bug error in scouting app 
+					String input = inputFile.nextLine(); //gets line of file
+					if(!input.split("}")[2].equals("true") && !input.split("}")[2].equals("false")) { // Accounts for the new line bug error in scouting app 
 						if (workaround)
 						{
 							inputFile.nextLine();
@@ -76,20 +73,18 @@ public class Main {
 						input += inputFile.nextLine();
 						if (inputFile.hasNext())
 							inputFile.nextLine();
+					}
 					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding 
 				        input = input.substring(1);
 				    }
-					try{
-//						Match tempM = new Match();
-//						Pit tempP = new Pit();
+					try
+					{
 						String[] accessData = input.split("}");
 						if(teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
 							addTeam(accessData[0],teams); //adds the team if it does not exist yet
 						} else { //if it does, it adds the data to it
 							if(accessData[2].equals("true") || accessData[2].equals("false")) {
 								addPit(accessData[0],input.substring(2),teams);
-//	for some reason this shit doesnt work and idk why------------------------------
-			//----------------------------------------------------
 							} else {
 								addMatch(accessData[0],input.substring(2),teams);
 							}
@@ -99,7 +94,7 @@ public class Main {
 					}
 				}
 			} catch (FileNotFoundException e) {
-				System.out.println("ERROR: File not found");
+				System.out.println("Error: File not found");
 			}
 		} 
 	}
@@ -121,7 +116,6 @@ public class Main {
 			if (teamExists(Integer.parseInt(teamNumber), teams) == -1) {
 				teams.add(new Team(Integer.parseInt(teamNumber)));
 				System.out.println("Added team " + teamNumber);
-		//		teams.add(new Team(Integer.parseInt(teamNumber)));
 			} else {
 				System.out.println("Team " + teamNumber + " already exists!");
 			}
@@ -189,7 +183,7 @@ public class Main {
 	}
 
 	public static void sortTeams(String key, ArrayList<Team> teams) { //sorts teams by a key
-		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) { //if int, sorts numericalls
+		if (teams.get(0).getDataArray(key).get(0) instanceof Integer) { //if int, sorts numerically
 			Collections.sort(teams, (a, b) -> (Integer) a.getAverage(key) < (Integer) b.getAverage(key) ? -1
 					: (Integer) a.getAverage(key) == (Integer) b.getAverage(key) ? 0 : 1);
 		} else if (teams.get(0).getDataArray(key).get(0) instanceof Boolean) {//if boolean, puts those with majority true to front
