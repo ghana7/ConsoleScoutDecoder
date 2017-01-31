@@ -80,16 +80,13 @@ public class Main {
 				        input = input.substring(1);
 				    }
 					try{
-//						Match tempM = new Match();
-//						Pit tempP = new Pit();
 						String[] accessData = input.split("}");
 						if(teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
 							addTeam(accessData[0],teams); //adds the team if it does not exist yet
 						} else { //if it does, it adds the data to it
 							if(accessData[2].equals("true") || accessData[2].equals("false")) {
 								addPit(accessData[0],input.substring(2),teams);
-//	for some reason this shit doesnt work and idk why------------------------------
-			//----------------------------------------------------
+
 							} else {
 								addMatch(accessData[0],input.substring(2),teams);
 							}
