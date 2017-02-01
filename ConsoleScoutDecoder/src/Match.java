@@ -14,7 +14,7 @@ public class Match {
 	public Match(String inputString) {
 		inputStr = inputString;
 		Object[] values = inputString.split("}");
-		if(values.length == keys.length) {
+		if(values.length == keys.length) { 
 			for(int i = 0; i < keys.length; i++) {
 				String strVal = (String)values[i];
 				if(isNumeric(strVal)) { //puts stuff in as the right type

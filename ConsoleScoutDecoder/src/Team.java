@@ -61,7 +61,7 @@ public class Team {
 		}
 	}
 	public String toString() {
-		String output = "Team " + number + "\n";
+		String output = "Team " + number + "\n"; 
 		for(Match m : matches) {
 			output += ("\tMatch - " + m + "\n"); //prints all matches, indented
 		}
@@ -83,6 +83,9 @@ public class Team {
 	
 	public String toData() { //exports the data of the 
 		String temp = pits.get(0).getInput();
-
+		for(Match match : matches) {
+			temp += "\n" + match.getInput();
+		}
+		return temp;
 	}
 }

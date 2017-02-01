@@ -72,7 +72,7 @@ public class Main {
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			File file = fc.getSelectedFile();
-			try {
+			try { 
 				Scanner inputFile = new Scanner(file);
 
 				while (inputFile.hasNext()) { // Does until there is no more data

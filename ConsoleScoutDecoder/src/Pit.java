@@ -24,7 +24,7 @@ public class Pit {
 				} else if(strVal.equals("true") || strVal.equals("false")) {
 					data.put(keys[i], Boolean.parseBoolean(strVal));
 				} else {
-					data.put(keys[i], strVal);
+					data.put(keys[i], strVal); 
 				}
 			}
 		} else {
