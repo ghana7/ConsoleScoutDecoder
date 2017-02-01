@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -50,6 +51,18 @@ public class Main {
 				System.out.println("Command not recognized");
 			}
 		}
+	}
+	
+	public static void save() { //this saves the data to the text file
+		try {
+			PrintWriter writer = new PrintWriter("data.txt");
+			
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public static void findFile(ArrayList<Team> teams) {

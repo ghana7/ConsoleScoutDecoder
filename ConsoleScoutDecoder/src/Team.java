@@ -80,4 +80,9 @@ public class Team {
 	public boolean equals(Team t) {
 		return number == t.number;
 	}
+	
+	public String toData() { //exports the data of the 
+		String temp = pits.get(0).getInput();
+
+	}
 }

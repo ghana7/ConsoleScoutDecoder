@@ -2,6 +2,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Pit {
+	private String inputStr;
 	private Map<String, Object> data = new HashMap<String,Object>();
 	//final static public String[] keys = new String[] {"autoGear","autoStartPlace","autoHighShoot","autoLowShoot","autoHopper","gear","roboSpeed","highShoot","lowShoot","shootSpeed","shootAccuracy","climb","climbSpeed","capacity","endStrat","matchStrat","allianceRole","autoNotes","whereOnField"};
 	final static public String[] keys = new String[] {"pitSize","pitQuality","pitOnFire"};
@@ -13,6 +14,7 @@ public class Pit {
 		}
 	}
 	public Pit(String inputString) {
+		inputStr = inputString;
 		Object[] values = inputString.split("}");
 		if(values.length == keys.length) {
 			for(int i = 0; i < keys.length; i++) {
@@ -29,6 +31,11 @@ public class Pit {
 			//failure
 		}
 	}
+	
+	public String getInput() {
+		return inputStr;
+	}
+	
 	public Object getValue(String key) {
 		return data.get(key);
 	}

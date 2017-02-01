@@ -1,6 +1,7 @@
 import java.io.*;
 import java.util.*;
 public class Match {
+	private String inputStr;
 	private Map<String, Object> data = new HashMap<String,Object>();
 	final static public String[] keys = new String[] {"highGoals","quality","driverIsAnGirl"};
 	//keys are all the pieces of info you gather when scouting, and sort by when analyzing
@@ -11,6 +12,7 @@ public class Match {
 		}
 	}
 	public Match(String inputString) {
+		inputStr = inputString;
 		Object[] values = inputString.split("}");
 		if(values.length == keys.length) {
 			for(int i = 0; i < keys.length; i++) {
@@ -27,6 +29,11 @@ public class Match {
 			//failure
 		}
 	}
+	
+	public String getInput() {
+		return inputStr;
+	}
+	
 	public Object getValue(String key) {//gets value for specific key
 		return data.get(key);
 	}
