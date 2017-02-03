@@ -60,39 +60,11 @@ public class Main {
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			File file = fc.getSelectedFile();
 			try {
-				Scanner inputFile = new Scanner(file);
+					Scanner inputFile = new Scanner(file);
 
-				while (inputFile.hasNext()) { // Does until there is no more data
-					String input = inputFile.nextLine(); // gets line of file
-					if (!input.split("}")[2].equals("true") && !input.split("}")[2].equals("false")) {
-						//for the weird ass bugs from the app
-						if (workaround) {
-							inputFile.nextLine();
-							workaround = false;
-						}
-						input += inputFile.nextLine();
-						if (inputFile.hasNext())
-							inputFile.nextLine();
+					while (inputFile.hasNext()) { // Does until there is no more data
+						String line = inputFile.nextLine();
 					}
-					if (input.startsWith("\uFEFF")) { // Workaround for UTF-8 BOM encoding
-						input = input.substring(1);
-					}
-					try {
-						String[] accessData = input.split("}");
-						if (teamExists(Integer.parseInt(accessData[0]), teams) == -1) {
-							addTeam(accessData[0], teams); // adds the team if it does not exist yet
-						} else { // if it does, it adds the data to it
-							if (accessData[2].equals("true") || accessData[2].equals("false")) {
-								addPit(accessData[0], input.substring(2), teams);
-
-							} else {
-								addMatch(accessData[0], input.substring(2), teams);
-							}
-						}
-					} catch (Exception error) {
-						System.out.println("Error: Invalid Input");
-					}
-				}
 			} catch (FileNotFoundException e) {
 				System.out.println("Error: File not found");
 			}
