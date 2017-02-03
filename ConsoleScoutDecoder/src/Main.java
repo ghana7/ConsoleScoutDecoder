@@ -120,6 +120,9 @@ public class Main {
 	public static boolean isLegalMatch(String s) { // checks if match string is in legal format
 		return (s.split("}").length == Match.keys.length);
 	}
+	public static boolean isLegalPit(String s) { // checks if pit string is in legal format
+		return (s.split("}").length == Pit.keys.length);
+	}
 
 	public static void addTeam(String teamNumber, ArrayList<Team> teams) { 
 		// adds team teamNumber to arraylist teams
@@ -158,14 +161,15 @@ public class Main {
 		// adds pit scout data by pitString to team teamNumber
 		if (Match.isNumeric(teamNumber)) {
 			if (teamExists(Integer.parseInt(teamNumber), teams) != -1) {
-				if (isLegalMatch(pitString)) {
-					teams.get(teamExists(Integer.parseInt(teamNumber), teams)).addMatch(pitString);
+				if (isLegalPit(pitString)) {
+					teams.get(teamExists(Integer.parseInt(teamNumber), teams)).addPit(pitString);
 					System.out.println("Added pit " + pitString);
 				} else {
 					System.out.println("This is not a legal pit format.");
 				}
 			} else {
-				System.out.println("Team " + teamNumber + " does not exist!");
+				addTeam(teamNumber,teams);
+				addPit(teamNumber,pitString,teams);
 			}
 		} else {
 			System.out.println(teamNumber + " is not a number. That argument must be a number.");
