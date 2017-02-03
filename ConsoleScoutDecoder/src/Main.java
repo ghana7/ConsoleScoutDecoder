@@ -53,7 +53,7 @@ public class Main {
 				System.out.println("Command not recognized");
 			}
 		}
-	}
+	} 
 	
 	public static void save(ArrayList<Team> teams) { //this saves the data to the text file
 		try {
