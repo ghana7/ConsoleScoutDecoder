@@ -73,16 +73,30 @@ public class Main {
 	public static void findFile(ArrayList<Team> teams) {
 		// this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
-		boolean workaround = true;
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			File file = fc.getSelectedFile();
 			try { 
 				Scanner inputFile = new Scanner(file);
 
-					while (inputFile.hasNext()) { // Does until there is no more data
-						String line = inputFile.nextLine();
+				while (inputFile.hasNext()) { // Does until there is no more data
+					String line = inputFile.nextLine();
+					String[] rawData = line.split("}");
+					String data = "";
+					for(int i = 2; i < rawData.length; i++) {
+						data += rawData[i]; 
+						data += "}";
 					}
+					data = data.substring(0, data.length() - 1);
+					switch(rawData[1]) {
+					case "match":
+						addMatch(rawData[0],data,teams);
+						break;
+					case "pit":
+						addPit(rawData[0],data,teams);
+						break;
+					}
+				}
 			} catch (FileNotFoundException e) {
 				System.out.println("Error: File not found");
 			}
@@ -128,7 +142,8 @@ public class Main {
 					System.out.println("This is not a legal match format.");
 				}
 			} else {
-				System.out.println("Team " + teamNumber + " does not exist!");
+				addTeam(teamNumber,teams);
+				addMatch(teamNumber,matchString,teams);
 			}
 		} else {
 			System.out.println(teamNumber + " is not a number. That argument must be a number.");
