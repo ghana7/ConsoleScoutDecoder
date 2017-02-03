@@ -7,7 +7,7 @@ public class Match {
 	//keys are all the pieces of info you gather when scouting, and sort by when analyzing
 	//to add a new key, just put it in this array - no other changes necessary
 	public Match() {
-		for(String k : keys) {  
+		for(String k : keys) { 
 			data.put(k, null);
 		}
 	}
