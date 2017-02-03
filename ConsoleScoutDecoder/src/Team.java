@@ -32,7 +32,7 @@ public class Team {
 			if(typeTester instanceof Integer) { //if int, returns mean
 				int sum = 0;
 				int count = 0;
-				for(Object o : allData) {
+				for(Object o : allData) { 
 					sum += (int)o;
 					count++;
 				}

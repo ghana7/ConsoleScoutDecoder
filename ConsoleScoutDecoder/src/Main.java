@@ -63,7 +63,7 @@ public class Main {
 				temp += team.toData();
 			}
 			writer.print(temp);
-		} catch (FileNotFoundException e) {
+		} catch (FileNotFoundException e) { 
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
