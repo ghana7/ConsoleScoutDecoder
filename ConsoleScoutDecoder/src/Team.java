@@ -32,7 +32,7 @@ public class Team {
 			if(typeTester instanceof Integer) { //if int, returns mean
 				int sum = 0;
 				int count = 0;
-				for(Object o : allData) {
+				for(Object o : allData) { 
 					sum += (int)o;
 					count++;
 				}
@@ -61,7 +61,7 @@ public class Team {
 		}
 	}
 	public String toString() {
-		String output = "Team " + number + "\n";
+		String output = "Team " + number + "\n"; 
 		for(Match m : matches) {
 			output += ("\tMatch - " + m + "\n"); //prints all matches, indented
 		}
@@ -79,5 +79,18 @@ public class Team {
 	}
 	public boolean equals(Team t) {
 		return number == t.number;
+	}
+	
+	public String toData() { //exports the data of the 
+		String temp = "";
+		
+		if(pits.size() > 0) {
+			temp += pits.get(0).getInput();
+		}
+		
+		for(Match match : matches) {
+			temp += "\n" + match.getInput();
+		}
+		return temp + "\n";
 	}
 }

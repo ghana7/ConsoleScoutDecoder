@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -32,6 +33,8 @@ public class Main {
 			case "findFile": // gets info from file
 				findFile(teams);
 				break;
+			case "save":
+				save(teams);
 			case "help":
 				System.out.println("addTeam <teamNumber>");
 				System.out.println("\tAdds a team with number teamNumber");
@@ -50,6 +53,21 @@ public class Main {
 				System.out.println("Command not recognized");
 			}
 		}
+	} 
+	
+	public static void save(ArrayList<Team> teams) { //this saves the data to the text file
+		try {
+			PrintWriter writer = new PrintWriter("data.txt");
+			String temp = "";
+			for(Team team : teams) {
+				temp += team.toData();
+			}
+			writer.print(temp);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	public static void findFile(ArrayList<Team> teams) {
@@ -59,8 +77,8 @@ public class Main {
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			File file = fc.getSelectedFile();
-			try {
-					Scanner inputFile = new Scanner(file);
+			try { 
+				Scanner inputFile = new Scanner(file);
 
 					while (inputFile.hasNext()) { // Does until there is no more data
 						String line = inputFile.nextLine();
