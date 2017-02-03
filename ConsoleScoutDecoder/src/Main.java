@@ -60,7 +60,7 @@ public class Main {
 			PrintWriter writer = new PrintWriter("data.txt");
 			String temp = "";
 			for(Team team : teams) {
-				temp += team.toData();
+				temp += team.toData() + "\n";
 			}
 			writer.print(temp);
 		} catch (FileNotFoundException e) {
@@ -70,6 +70,7 @@ public class Main {
 		
 	}
 
+	@SuppressWarnings("deprecation")
 	public static void findFile(ArrayList<Team> teams) {
 		// this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
@@ -97,10 +98,13 @@ public class Main {
 						break;
 					}
 				}
+				inputFile.close();
 			} catch (FileNotFoundException e) {
 				System.out.println("Error: File not found");
 			}
+			
 		}
+		fc.setEnabled(false);
 	}
 
 	public static int teamExists(int t, ArrayList<Team> teams) { 
