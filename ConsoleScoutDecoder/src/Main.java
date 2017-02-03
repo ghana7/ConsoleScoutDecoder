@@ -33,6 +33,8 @@ public class Main {
 			case "findFile": // gets info from file
 				findFile(teams);
 				break;
+			case "save":
+				save(teams);
 			case "help":
 				System.out.println("addTeam <teamNumber>");
 				System.out.println("\tAdds a team with number teamNumber");
@@ -53,11 +55,14 @@ public class Main {
 		}
 	}
 	
-	public static void save() { //this saves the data to the text file
+	public static void save(ArrayList<Team> teams) { //this saves the data to the text file
 		try {
 			PrintWriter writer = new PrintWriter("data.txt");
-			
-			
+			String temp = "";
+			for(Team team : teams) {
+				temp += team.toData();
+			}
+			writer.print(temp);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

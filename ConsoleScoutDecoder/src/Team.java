@@ -82,10 +82,15 @@ public class Team {
 	}
 	
 	public String toData() { //exports the data of the 
-		String temp = pits.get(0).getInput();
+		String temp = "";
+		
+		if(pits.size() > 0) {
+			temp += pits.get(0).getInput();
+		}
+		
 		for(Match match : matches) {
 			temp += "\n" + match.getInput();
 		}
-		return temp;
+		return temp + "\n";
 	}
 }

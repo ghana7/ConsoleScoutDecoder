@@ -10,7 +10,7 @@ public class Pit {
 	//to add a new key, just put it in this array - no other changes necessary
 	public Pit() {
 		for(String k : keys) {
-			data.put(k, null);
+			data.put(k, null); 
 		}
 	}
 	public Pit(String inputString) {
