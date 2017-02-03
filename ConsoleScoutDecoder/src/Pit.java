@@ -4,8 +4,10 @@ import java.util.Map;
 public class Pit {
 	private String inputStr;
 	private Map<String, Object> data = new HashMap<String,Object>();
-	//final static public String[] keys = new String[] {"autoGear","autoStartPlace","autoHighShoot","autoLowShoot","autoHopper","gear","roboSpeed","highShoot","lowShoot","shootSpeed","shootAccuracy","climb","climbSpeed","capacity","endStrat","matchStrat","allianceRole","autoNotes","whereOnField"};
-	final static public String[] keys = new String[] {"pitSize","pitQuality","pitOnFire"};
+	final static public String[] keys = new String[] {"autoGearPit","autoHighPit","autoLowPit","autoHopperPit","autoStartPit","gearPit","highGoalPit",
+													  "lowGoalPit","driveSpeedPit","shootSpeedPit","shootAccuracyPit","climbPit","climbSpeedPit",
+													  "endStrategyPit","strategyPit","idealAlly","ballCapacityPit","fieldUsagePit","scouterName",
+													  "notesPit","intakePit"};
 	//keys are all the pieces of info you gather when scouting, and sort by when analyzing
 	//to add a new key, just put it in this array - no other changes necessary
 	public Pit() {

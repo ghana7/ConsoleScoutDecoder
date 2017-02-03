@@ -3,7 +3,8 @@ import java.util.*;
 public class Match {
 	private String inputStr;
 	private Map<String, Object> data = new HashMap<String,Object>();
-	final static public String[] keys = new String[] {"highGoals","quality","driverIsAnGirl"};
+	final static public String[] keys = new String[] {"autoGear","autoGearStation","autoBaseLine","autoLow","autoHigh","autoHopper","lowGoal","highGoal",
+													  "gear","cycleTime","emptyTime","climb","survive","quality","strategy","driveTeam","notes"};
 	//keys are all the pieces of info you gather when scouting, and sort by when analyzing
 	//to add a new key, just put it in this array - no other changes necessary
 	public Match() {
