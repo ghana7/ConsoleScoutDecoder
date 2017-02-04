@@ -88,15 +88,18 @@ public class Main {
 						data += rawData[i]; 
 						data += "}";
 					}
-					data = data.substring(0, data.length() - 1);
-					switch(rawData[1]) {
-					case "match":
-						addMatch(rawData[0],data,teams);
-						break;
-					case "pit":
-						addPit(rawData[0],data,teams);
-						break;
+					if (data.length() > 0) {
+						data = data.substring(0, (data.length() - 1));
+						switch(rawData[1]) {
+						case "match":
+							addMatch(rawData[0],data,teams);
+							break;
+						case "pit":
+							addPit(rawData[0],data,teams);
+							break;
+						}
 					}
+					
 				}
 				inputFile.close();
 			} catch (FileNotFoundException e) {
