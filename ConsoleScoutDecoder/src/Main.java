@@ -78,7 +78,7 @@ public class Main {
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
 			fc.transferFocusUpCycle();
-			File file = fc.getSelectedFile();
+			File file = fc.getSelectedFile(); 
 			try { 
 				Scanner inputFile = new Scanner(file);
 
