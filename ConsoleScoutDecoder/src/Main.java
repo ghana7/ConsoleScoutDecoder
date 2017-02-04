@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
-import javax.swing.JFileChooser;
+import javax.swing.*;
 
 public class Main {
 	public static void main(String[] args) {
@@ -74,8 +74,10 @@ public class Main {
 	public static void findFile(ArrayList<Team> teams) {
 		// this is basically all from Eric's code so blame him if it doesn't make sense
 		JFileChooser fc = new JFileChooser();
+	
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
+			fc.transferFocusUpCycle();
 			File file = fc.getSelectedFile();
 			try { 
 				Scanner inputFile = new Scanner(file);
