@@ -76,6 +76,7 @@ public class Main {
 		JFileChooser fc = new JFileChooser();
 
 		if (fc.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {// Shows user file chooser
+			
 			File file = fc.getSelectedFile();
 			try { 
 				Scanner inputFile = new Scanner(file);
